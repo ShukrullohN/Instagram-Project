@@ -3,6 +3,8 @@ from rest_framework import generics, status
 from django.utils import timezone
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.generics import CreateAPIView, UpdateAPIView
+from users.serializers import ResetPasswordSerializer
 
 from users.models import UserModel, ConfirmationModel, CODE_VERIFIED, DONE
 from rest_framework.permissions import AllowAny, IsAuthenticated

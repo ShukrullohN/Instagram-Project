@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from django.core.validators import FileExtensionValidator
 
 from shared.utils import send_code_to_email, send_code_to_phone
 from users.models import UserModel, VIA_EMAIL, VIA_PHONE
@@ -144,7 +145,7 @@ class ResetPasswordSerializer(serializers.ModelSerializer):
     confirm_password = serializers.CharField(min_length=8, required=True, write_only=True)
 
     class Meta:
-        model = User
+        model = UserModel
         fields = (
             'id',
             'password',
@@ -179,6 +180,6 @@ class ChangeUserAvatarSerializer(serializers.Serializer):
         photo = validated_data.get('photo')
         if photo:
             instance.photo = photo
-            instance.auth_status = PHOTO_DONE
+            instance.auth_status = PHOTO
             instance.save()
         return instance
