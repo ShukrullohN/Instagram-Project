@@ -43,7 +43,7 @@ class UserModel(AbstractUser, BaseModel):
     avatar = models.ImageField(upload_to='avatars', null=True, blank=True)
 
     def __str__(self):
-        return self.get_full_name()
+        return self.username
 
     @property
     def full_name(self):
@@ -57,7 +57,7 @@ class UserModel(AbstractUser, BaseModel):
             self.username = temp_username
 
     def check_pass(self):
-        if self.password:
+        if not self.password:
             self.password = f"password-{uuid.uuid4()}"
 
     def check_email(self):
